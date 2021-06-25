@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+
+{% set page_head_title = 'עגלת קניות' %}
+
+{% block page_head_css %}
+    <script src="https://kit.fontawesome.com/380d4e098b.js" crossorigin="anonymous"></script>
+    <script src="/static/css/header%20and%20footer.css"></script>
+    <link rel="stylesheet" href="{{ url_for('cart.static', filename='css/cart4.css') }}">
+{% endblock %}
+
+{% block page_body_main_content %}
+
+    <h1 class="title1">עגלת קניות</h1>
+    {% if products %}
+
+        <table class="table cart-table" id="myTable">
+
+            <style>
+                table {
+                    border-collapse: collapse;
+                    border-spacing: 0;
+                    width: 100%;
+                    border: 1px solid #ddd;
+                }
+
+                tr:nth-child(even) {
+                    background-color: #f2f2f2
+                }
+
+            </style>
+            <tr>
+                <th>תמונה</th>
+                <th>שם</th>
+                <th>מחיר</th>
+                <th>כמות</th>
+                <th>הסר</th>
+            </tr>
+
+            {% for product in products %}
+                <tr id="hala1">
+                    <td><img src="{{ url_for('oneProduct.static', filename='media/'+product.image_URL) }}">
+                    <td class="hala1">{{ product.product_name }}</td>
+                    <td class="hala1"> {{ product.price }} ₪ </td>
+                    <td class="hala1">{{ product.quantity }}</td>
+                    <td>
+                        <form action="/Delete_Item" method="post">
+                            <input type="hidden" name="product" value={{ product.product_ID }}>
+                            <button class="remove-item" type="submit" onclick="return remove_item('sweetRow');">X
+                            </button>
+                        </form>
+
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <br>
+
+        <form action="/send_order" method="post">
+            <button class="button1" type="submit">שלח הזמנה</button>
+        </form>
+
+
+
+
+        <br><br>
+    {% else %}
+        {% if message %}
+            <h1 class="message">{{ message }}</h1>
+        {% else %}
+            <h1 class="message" style="text-align: center">העגלה שלך עדיין ריקה</h1>
+        {% endif %}
+
+    {% endif %}
+
+{% endblock %}
+
+
+
+
+
+<!--<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/static/css/header%20and%20footer.css">
+    <link rel="stylesheet" href="{{ url_for('cart.static', filename='css/cart4.css') }}">
+    <script src="https://kit.fontawesome.com/380d4e098b.js" crossorigin="anonymous"></script>
+    <title>הרשמה</title>
+</head>
+<body>
+<div class="col-12 header">
+    <div class="rowHeader">
+        <h1 class="col-4" id="headCont">להזמנות 050-1357951</h1>
+        <div class="col-4" id="headImg">
+            <a href="{{ url_for('home.static', filename='/') }}" class="footer">
+                <img src="{{ url_for('home.static', filename='media/logo3.png') }}">
+            </a>
+        </div>
+
+        <div class="col-4" id="headShop">
+            <a href="/signIn" class="footer">
+                <button class="headerBTN" id="login">הרשמה/כניסה</button>
+            </a>
+            <a href="/cart" class="footer">
+                <i class="fas fa-shopping-cart" id="shop"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="rowHeader">
+        <div class="col-2-head">
+            <a href="/otherPage" class="footer">
+                <button class="headerBTN">מוצרים נלווים</button>
+            </a>
+        </div>
+
+        <div class="col-2-head">
+            <a href="/flowers" class="footer">
+                <button class="headerBTN">פרחים לשבת</button>
+            </a>
+        </div>
+
+        <div class="col-2-head">
+            <a href="/halot" class="footer">
+                <button class="headerBTN">החלות שלנו</button>
+            </a>
+
+        </div>
+        <div class="col-2-head">
+            <a href="/about" class="footer">
+                <button class="headerBTN">קצת עלינו</button>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="col-12 footer">
+
+    <div class="mainbody center-content">
+        <h1 class="title1">עגלת קניות</h1>
+        <table class="table cart-table" id="myTable">
+
+            <style>
+                table {
+                    border-collapse: collapse;
+                    border-spacing: 0;
+                    width: 100%;
+                    border: 1px solid #ddd;
+                }
+
+                tr:nth-child(even) {
+                    background-color: #f2f2f2
+                }
+
+
+            </style>
+            <tr>
+                <th>תמונה</th>
+                <th>שם</th>
+                <th>מחיר</th>
+                <th>כמות</th>
+                <th>סה"כ</th>
+                <th>הסר</th>
+            </tr>
+
+            <tr id="hala1">
+                <td><img src="{{ url_for('cart.static', filename='media/BS1.png') }}">
+                <td>חלה הצגה</td>
+                <td>$10</td>
+                <td><input class="qty-value" type="text" id="qtyitem1" name="qtyitem1" value="2"></td>
+                <td id="Amount">$10</td>
+                <td>
+                    <button class="remove-item" type="button" onclick="return remove_item('sweetRow');">X</button>
+                </td>
+            </tr>
+            <tr id="hala2">
+                <td><img src="{{ url_for('cart.static', filename='media/BS2.png') }}">
+                <td>חלה פחד אלוהי</td>
+                <td>$20</td>
+                <td><input class="qty-value" type="text" id="qtyitem2" name="qtyitem2" value="1"></td>
+                <td id="Amount1">$20</td>
+                <td>
+                    <button class="remove-item" type="button" onclick="return remove_item('cakeRow');">X</button>
+                </td>
+            </tr>
+            <tr id="hala3">
+                <td><img src="{{ url_for('cart.static', filename='media/BS3.png') }}">
+                <td>חלת גלשה</td>
+                <td>$20</td>
+                <td><input class="qty-value" type="text" id="qtyitem2" name="qtyitem2" value="1"></td>
+                <td id="Amount3">$20</td>
+                <td>
+                    <button class="remove-item" type="button" onclick="return remove_item('cakeRow');">X</button>
+                </td>
+            </tr>
+        </table>
+
+        <br>
+        <button class="button1" type="submit">מעבר לתשלום</button>
+
+        <br><br>
+
+        <div class="col-12 footer">
+
+            <div class="col-4-footer">
+                <div class="rowFooter">
+                    <div class="col-12-footer" id="footerImg"><img
+                            src="{{ url_for('home.static', filename='media/logo3.png') }}"></div>
+                    <button class="button1" onclick="topFunction()" style="width:10%" id="topFunction"
+                            title="Back to top">חזרה
+                        לראש העמוד
+                    </button>
+
+                </div>
+            </div>
+
+            <div class="col-4-footer">
+                <div class="rowFooter">
+                    <div class="col-12-footer">
+                        <a href="/otherPage" class="footer">
+                            <button class="footerBTN">מוצרים נלווים</button>
+                        </a>
+
+                    </div>
+
+                    <div class="col-12-footer">
+                        <a href="/flowers" class="footer">
+                            <button class="footerBTN">פרחים לשבת</button>
+                        </a>
+                    </div>
+
+                    <div class="col-12-footer">
+                        <a href="/halot" class="footer">
+                            <button class="footerBTN">החלות שלנו</button>
+                        </a>
+                    </div>
+                    <div class="col-12-footer">
+                        <a href="/about" class="footer">
+                            <button class="footerBTN">קצת עלינו</button>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-4-footer">
+                <p class="col-12" id="FootCont">החלות של הלל <br>
+                    באר שבע <br>
+                    להזמנות
+                    050-1357951 <br>
+                </p>
+                <a href="https://www.instagram.com/halelfish/" target="blanck">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+
+</body>
+</html>
+
+
+  <video autoplay muted>
+            <source src="WhatsApp Video 2021-05-09 at 12.10.08.mp4" type="video/mp4">
+          </video>
+>

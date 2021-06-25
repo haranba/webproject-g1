@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% set page_head_title = 'Product' %}
+
+{% block page_head_css %}
+    <link rel="stylesheet" href="/static/css/header%20and%20footer.css">
+    <link rel="stylesheet" href="{{ url_for('oneProduct.static', filename='css/productstyle.css') }}">
+    <script src="https://kit.fontawesome.com/380d4e098b.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block page_body_main_content %}
+    <section>
+        {% if product %}
+            <div class="hero">
+            <div class="row">
+                <div class="col">
+
+                    <div class="slider">
+                        <div class="preview">
+                            <img src="{{ url_for('oneProduct.static', filename='media/'+product[0].image_URL) }}"
+                                 alt={{ product.name }}>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col">
+
+                    <div class="content">
+                        <h2>{{ product[0].product_name }}</h2>
+                        <p class="Description"> {{ product[0].description }} </p>
+                        <h3>{{ product[0].price }}</h3>
+                        </select></p>
+
+                        {% if session %}
+                            <form action="/add_to_cart" method="post">
+                                <input type="hidden" name="product" value={{ product[0].product_ID }}>כמות :
+                                <input type="number" class="quantity" name="quantity" value="1">
+                                <button type="submit" class="button">הוספה לעגלה</button>
+                                {% if message %}
+                                    <div class="message">
+                                        {{ message }}
+                                    </div>
+                                {% endif %}
+                            </form>
+
+                        {% else %}
+                            <p class="message"><b>התחברי על מנת להוסיף את הפריט לרשימת המשאלות</b></p>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+            </div>
+        {% endif %}
+        </div>
+    </section>
+{% endblock %}
+

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% set page_head_title = 'About' %}
+
+{% block page_head_css %}
+    <script src="https://kit.fontawesome.com/380d4e098b.js" crossorigin="anonymous"></script>
+    <script src="{{ url_for('category.static', filename='js/category.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('about.static', filename='css/about.css') }}">
+{% endblock %}
+
+{% block page_body_main_content %}
+
+<!------ welcome bar ----->
+
+<div class="col-8">
+    <div class="col-12">
+        <div class="row">
+
+            <video class="rbImg" id="aboutVideo" autoplay muted>
+                <source src="{{ url_for('about.static', filename='media/video1.mp4') }}" class="rbImg">
+            </video>
+            <img src="{{ url_for('about.static', filename='media/rbImg1.jpeg') }}" class="rbImg">
+            <img src="{{ url_for('about.static', filename='media/rbImg2.jpeg') }}" id="circle" onclick="stop()" ;
+                 class="rbImg">
+            <img src="{{ url_for('about.static', filename='media/rbImg3.jpeg') }}" class="rbImg">
+        </div>
+    </div>
+</div>
+<div class="col-4">
+    <div class="col-12">
+        <h1 class="title1"> קצת עלינו</h1>
+        <p class="text1">
+            "החלות של הלל" הוא עסק בוטיק ביתי שנולד בלב באר שבע<br>
+            עוד לפני שהפכו לסמל, החלות של הלל תמיד היו שם דבר לכל מי שזכה לטעום אותן.<br>
+            מאז ומתמיד היה ברור שיגיע יום ובו לכולם תהיה הזדמנות לטעום מהחלות האלה<br><br>
+            החלום לאט לאט התחיל להפוך למציאות,<br>
+            והיום אין דבר כזה יום שישי בלי החלות של הלל!<br>
+            וכדי להשלים את החוויה, ב"חלות של הלל" אפשר להינות מפרחים לשבת, כלי קרמיקה ועוד דברים שיעשו לכם שמח על הלב
+            ובבטן<br><br>
+            ככה זה כשהכל נעשה בהמון אהבה!<br>
+        </p>
+    </div>
+</div>
+<div class="col-4">
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% set page_head_title = 'Category' %}
+
+{% block page_head_css %}
+    <script src="https://kit.fontawesome.com/380d4e098b.js" crossorigin="anonymous"></script>
+    <script src="{{ url_for('category.static', filename='js/category.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('category.static', filename='css/listproductsstyle.css') }}">
+{% endblock %}
+
+
+{% block page_body_main_content %}
+    <div class="container">
+        {% if products %}
+            {% if all_products %}
+                <h1>כל המוצרים</h1>
+            {% else %}
+                <h1>{{ products[0].category_name }}</h1>
+            {% endif %}
+
+            <div class="products">
+
+                {% for product in products %}
+
+                    <section class="products1">
+                        <div class="product-card">
+                            <a href="/oneProduct?id={{ product.product_ID }}" class="footer">
+                                <div class="product-image">
+                                    <img src="{{ url_for('oneProduct.static', filename='media/' + product.image_URL) }}"
+                                         alt="{{ product.product_name }}">
+                                    <div class="protuct-hover">
+
+
+
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="product-info">
+                                <h4>{{ product.product_name }}</h4>
+                                <h5>{{ product.price }} ש״ח</h5>
+                            </div>
+                        </div>
+
+                    </section>
+
+
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

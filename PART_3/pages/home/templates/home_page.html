@@ -1,0 +1,280 @@
+{% extends 'base.html' %}
+
+{% set page_head_title = 'Home Page' %}
+
+{% block page_head_css %}
+    <script src="https://kit.fontawesome.com/380d4e098b.js" crossorigin="anonymous"></script>
+    <script src="{{ url_for('home.static', filename='js/halot.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='css/home_page.css') }}">
+{% endblock %}
+
+{% block page_body_main_content %}
+
+<!-------- welcome bar -------->
+
+<div class="col-12 ourBread">
+    <img src="{{ url_for('home.static', filename='media/ourBread.jpeg') }}">
+    <a href="/category?id=4" class="footer">
+        <button class="btn" id="all_product"> לכל המוצרים</button>
+    </a>
+
+
+</div>
+
+<!-------- categories -------->
+
+<div class="row">
+
+    <div class="col-4 other">
+        <h1 class="title1">מוצרים נלווים</h1>
+        <img src="{{ url_for('home.static', filename='media/other.jpeg') }}" class="catImg">
+        <a href="/category?id=3" class="footer">
+            <button class="catBTN">לבחירת מוצרים נלווים</button>
+        </a>
+
+    </div>
+
+
+    <div class="col-4 flowers">
+        <h1 class="title1">פרחים לשבת</h1>
+        <img src="{{ url_for('home.static', filename='media/flowers.jpg') }}" class="catImg">
+        <a href="/category?id=2" class="footer">
+            <button class="catBTN">לבחירת פרחים</button>
+        </a>
+    </div>
+
+
+    <div class="col-4 bread">
+        <h1 class="title1">החלות שלנו</h1>
+        <img src="{{ url_for('home.static', filename='media/halot.jpeg') }}" class="catImg">
+        <a href="/category?id=1" class="footer">
+            <button class="catBTN">לבחירת חלות</button>
+        </a>
+
+    </div>
+
+
+
+<!-------- best sellers -------->
+
+   <div class="row">
+    <div class="bestSellers">
+        <h1 class="title1">Best Sellers</h1>
+        {% for product in best_sellers %}
+
+            <div class="col-3 BS1">
+                <a href="/oneProduct?id={{product.product_ID}}">
+                    <img src="{{ url_for('oneProduct.static', filename='media/'+ product.image_URL) }}">
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    </div>
+
+{% endblock %}
+
+
+
+
+<!--<!doctype html>
+<html lang="en">
+<head>
+    <title>Home Page</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/header%20and%20footer.css">
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='css/home_page.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/380d4e098b.js" crossorigin="anonymous"></script>
+    <script src="{{ url_for('home.static', filename='js/halot.js') }}"></script>
+</head>
+<body>
+
+
+<div class="col-12 header">
+    <div class="rowHeader">
+        <h1 class="col-4" id="headCont">להזמנות 050-1357951</h1>
+        <div class="col-4" id="headImg">
+            <a href="{{ url_for('home.static', filename='/') }}" class="footer">
+                <img src="{{ url_for('home.static', filename='media/logo3.png') }}">
+            </a>
+        </div>
+
+        <div class="col-4" id="headShop">
+             <a href="/signIn" class="footer">
+                <button class="headerBTN" id="login">הרשמה/כניסה</button>
+            </a>
+            <a href="/cart" class="footer">
+                <i class="fas fa-shopping-cart" id="shop"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="rowHeader">
+        <div class="col-2-head">
+            <a href="/otherPage" class="footer">
+                <button class="headerBTN">מוצרים נלווים</button>
+            </a>
+        </div>
+
+        <div class="col-2-head">
+            <a href="/flowers" class="footer">
+                <button class="headerBTN">פרחים לשבת</button>
+            </a>
+        </div>
+
+        <div class="col-2-head">
+            <a href="/halot" class="footer">
+                <button class="headerBTN">החלות שלנו</button>
+            </a>
+
+        </div>
+        <div class="col-2-head">
+            <a href="/about" class="footer">
+                <button class="headerBTN">קצת עלינו</button>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="col-12 ourBread">
+    <img src="{{ url_for('home.static', filename='media/ourBread.jpeg') }}">
+    <a href="/category?id=4" class="footer">
+        <button class="btn" id="all_product"> לכל המוצרים</button>
+    </a>
+
+
+</div>
+
+
+<div class="row">
+
+    <div class="col-4 other">
+        <h1 class="title1">מוצרים נלווים</h1>
+        <img src="{{ url_for('home.static', filename='media/other.jpeg') }}" class="catImg">
+        <a href="/category?id=3" class="footer">
+            <button class="catBTN">לבחירת מוצרים נלווים</button>
+        </a>
+
+    </div>
+
+
+    <div class="col-4 flowers">
+        <h1 class="title1">פרחים לשבת</h1>
+        <img src="{{ url_for('home.static', filename='media/flowers.jpg') }}" class="catImg">
+        <a href="/category?id=2" class="footer">
+            <button class="catBTN">לבחירת פרחים</button>
+        </a>
+    </div>
+
+
+    <div class="col-4 bread">
+        <h1 class="title1">החלות שלנו</h1>
+        <img src="{{ url_for('home.static', filename='media/halot.jpeg') }}" class="catImg">
+        <a href="/category?id=1" class="footer">
+            <button class="catBTN">לבחירת חלות</button>
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<div class="row">
+    <div class="bestSellers">
+        <h1 class="title1">Best Sellers</h1>
+        <div class="col-3 BS1">
+            <a href="OneProductPage.html">
+                <img src="{{ url_for('home.static', filename='media/BS1.png') }}">
+            </a>
+        </div>
+        <div class="col-3 BS2">
+            <a href="OneProductPage.html">
+                <img src="{{ url_for('home.static', filename='media/BS2.png') }}">
+            </a>
+        </div>
+        <div class="col-3 BS3">
+            <a href="OneProductPage.html">
+                <img src="{{ url_for('home.static', filename='media/BS3.png') }}">
+            </a>
+        </div>
+        <div class="col-3 BS4">
+            <a href="OneProductPage.html">
+                <img src="{{ url_for('home.static', filename='media/BS4.png') }}">
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="col-12 footer">
+
+    <div class="col-4-footer">
+        <div class="rowFooter">
+            <div class="col-12-footer" id="footerImg"><img
+                    src="{{ url_for('home.static', filename='media/logo3.png') }}"></div>
+            <button class="button1" onclick="topFunction()" style="width:10%" id="topFunction" title="Back to top">חזרה
+                לראש העמוד
+            </button>
+
+        </div>
+    </div>
+
+    <div class="col-4-footer">
+        <div class="rowFooter">
+            <div class="col-12-footer">
+                <a href="/otherPage" class="footer">
+                    <button class="footerBTN">מוצרים נלווים</button>
+                </a>
+
+            </div>
+
+            <div class="col-12-footer">
+                <a href="/flowers" class="footer">
+                    <button class="footerBTN">פרחים לשבת</button>
+                </a>
+            </div>
+
+            <div class="col-12-footer">
+                <a href="/halot" class="footer">
+                    <button class="footerBTN">החלות שלנו</button>
+                </a>
+            </div>
+            <div class="col-12-footer">
+                <a href="/about" class="footer">
+                    <button class="footerBTN">קצת עלינו</button>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-4-footer">
+        <p class="col-12" id="FootCont">החלות של הלל <br>
+            באר שבע <br>
+            להזמנות
+            050-1357951 <br>
+        </p>
+        <a href="https://www.instagram.com/halelfish/" target="blanck">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+  <video autoplay muted>
+            <source src="WhatsApp Video 2021-05-09 at 12.10.08.mp4" type="video/mp4">
+          </video>
+>
