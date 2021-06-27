@@ -1,3 +1,17 @@
+create table product
+(
+    product_ID   int auto_increment
+        primary key,
+    product_name varchar(255) not null,
+    description  varchar(255) not null,
+    price        float        not null,
+    image_URL    varchar(255) null,
+    category_ID  int          not null,
+    best_seller  tinyint(1)   not null,
+    constraint product_category_ID_fk
+        foreign key (category_ID) references category (catecory_ID)
+);
+
 INSERT INTO db_g1.product (product_ID, product_name, description, price, image_URL, category_ID, best_seller) VALUES (1, 'חלה קלאסית', 'חלה עם שומשום. פשטות זה שם המשחק', 18, 'klasit.jpeg', 1, 1);
 INSERT INTO db_g1.product (product_ID, product_name, description, price, image_URL, category_ID, best_seller) VALUES (2, 'חלה מקומחת', 'חלה ללא תוספות, במעטה קמח', 18, 'kemah.jpeg', 1, 1);
 INSERT INTO db_g1.product (product_ID, product_name, description, price, image_URL, category_ID, best_seller) VALUES (3, 'חלה לאמיצים', 'חלה עם תמרים, שבבי סוכר, ושקדים פרוסים. לאמיצים בלבד!', 20, 'amitzim.jpeg', 1, 1);
